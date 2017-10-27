@@ -1,0 +1,41 @@
+# Project information.
+project:
+  root: /root
+  url: http://localhost
+
+# Site information.
+site:
+  name: Site name
+  mail: email@example.com
+  profile: standard
+  update: false
+  locale: en
+
+# Administrator account.
+account:
+  name: admin
+  password: admin
+  mail: admin@example.org
+
+# Database parameters.
+database:
+  host: 127.0.0.1
+  port: 3306
+  name: d8p
+  user: root
+  password: ''
+  prefix: ''
+
+# Behat settings.
+behat:
+  # Behat configuration template.
+  source: tests/behat.yml.dist
+  # Resulting Behat configuration file after performing token replacement.
+  destination: tests/behat.yml
+
+bin:
+  drush: ./bin/drush
+
+settings:
+  config_directories:
+    sync: ../config/sync
