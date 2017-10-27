@@ -15,6 +15,34 @@ class Tasks extends RoboTasks {
   use \NuvoleWeb\Robo\Task\Config\loadTasks;
 
   /**
+   * Setup Behat on Amazon.
+   *
+   * @command project:setup-behat-amazon
+   * @aliases psba
+   */
+  public function projectSetupBehatAmazon() {
+    $project_tokens = $this->config('project.tokens');
+    $behat_tokens = $this->config('behat.tokens');
+
+    $hostname = $this->taskExec('curl http://169.254.169.254/latest/meta-data/local-hostname');
+
+    $this->collectionBuilder()->addTaskList([
+      $this->taskFilesystemStack()
+        ->copy($this->config('behat.source'), $this->config('behat.destination'), TRUE),
+      $this->taskReplaceInFile($this->config('behat.destination'))
+        ->from(array_keys($behat_tokens))
+        ->to($behat_tokens),
+      $this->taskReplaceInFile($this->config('behat.destination'))
+        ->from("{root}")
+        ->to($this->config('project.root')),
+      $this->taskReplaceInFile($this->config('behat.destination'))
+        ->from("{url}")
+        ->to($hostname),
+    ])->run();
+  }
+
+
+  /**
    * Setup Behat.
    *
    * @command project:setup-behat
