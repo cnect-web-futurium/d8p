@@ -1,6 +1,6 @@
 pipeline {
     stages {
-        stage('Provision') {
+        stage('Provisioning') {
             ec2 cloud: 'ec2-slave-test', template: 'LEMP'
             sleep time: 7, unit: 'MINUTES'
             node {
