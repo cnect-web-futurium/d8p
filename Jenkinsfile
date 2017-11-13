@@ -1,4 +1,7 @@
 node('JenkinsSlave') {
+    stage('Debug') {
+        sh '''printenv'''
+    }
     stage('Build') {
         sh '''
             cd /home/ubuntu/workspace/ &&
