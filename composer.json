@@ -34,8 +34,6 @@
         "drupal/features": "^3.5",
         "drupal/field_group": "^1.0@RC",
         "drupal/geysir": "^1.0",
-        "drupal/page_manager": "^4.0@beta",
-        "drupal/panels": "^4.1",
         "drupal/paragraphs": "^1.1",
         "drush/drush": "~9.0",
         "webflo/drupal-finder": "^1.0.0",
