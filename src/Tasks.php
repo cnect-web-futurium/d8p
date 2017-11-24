@@ -15,32 +15,33 @@ class Tasks extends RoboTasks {
   use \NuvoleWeb\Robo\Task\Config\loadTasks;
 
   /**
-   * Setup Behat on Amazon.
-   *
-   * @command project:setup-behat-amazon
-   * @aliases psba
+   * Output hostname.
    */
-  public function projectSetupBehatAmazon() {
-    $project_tokens = $this->config('project.tokens');
-    $behat_tokens = $this->config('behat.tokens');
-
-    $hostname = $this->taskExec('curl http://169.254.169.254/latest/meta-data/local-hostname');
-
-    $this->collectionBuilder()->addTaskList([
-      $this->taskFilesystemStack()
-        ->copy($this->config('behat.source'), $this->config('behat.destination'), TRUE),
-      $this->taskReplaceInFile($this->config('behat.destination'))
-        ->from(array_keys($behat_tokens))
-        ->to($behat_tokens),
-      $this->taskReplaceInFile($this->config('behat.destination'))
-        ->from("{root}")
-        ->to($this->config('project.root')),
-      $this->taskReplaceInFile($this->config('behat.destination'))
-        ->from("{url}")
-        ->to($hostname),
-    ])->run();
+  public function ec2Hostname() {
+    $result = $this
+      ->taskExec('curl http://169.254.169.254/latest/meta-data/public-hostname')
+      ->printOutput(false)
+      ->run();
+    if($result->wasSuccessful()) {
+      $hostname = $result->getMessage();
+      $this->say($hostname);
+    }
   }
 
+  /**
+   * Output ip.
+   */
+  public function ec2Ip() {
+    $result = $this
+      ->taskExec('curl http://169.254.169.254/latest/meta-data/local-ipv4')
+      ->printOutput(false)
+      ->run();
+
+    if($result->wasSuccessful()) {
+      $ip = $result->getMessage();
+      $this->say($ip);
+    }
+  }
 
   /**
    * Setup Behat.
