@@ -27,3 +27,6 @@
 .buildpath
 .project
 .settings/
+
+# Ignore build artifacts
+robo.yml
