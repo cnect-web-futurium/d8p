@@ -24,7 +24,22 @@ class Tasks extends RoboTasks {
       ->run();
     if($result->wasSuccessful()) {
       $hostname = $result->getMessage();
-      $this->say("<a href=\"$hostname\">Click here to visit the site</a>");
+      $this->say($hostname);
+    }
+  }
+
+  /**
+   * Output ip.
+   */
+  public function ec2Ip() {
+    $result = $this
+      ->taskExec('curl http://169.254.169.254/latest/meta-data/local-ipv4')
+      ->printOutput(false)
+      ->run();
+
+    if($result->wasSuccessful()) {
+      $ip = $result->getMessage();
+      $this->say($ip);
     }
   }
 
