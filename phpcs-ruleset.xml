@@ -23,6 +23,9 @@
     <exclude-pattern>/src</exclude-pattern>
     <exclude-pattern>/resources</exclude-pattern>
 
+    <!-- Exclude folders of drupal core. -->
+    <exclude-pattern>/web/sites/example.settings.local.php</exclude-pattern>
+
     <!-- Exclude contrib folders. -->
     <exclude-pattern>contrib</exclude-pattern>
     <exclude-pattern>contributed</exclude-pattern>
