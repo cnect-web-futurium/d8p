@@ -12,14 +12,4 @@ use D8P\Robo\Tasks as D8PTasks;
  */
 class RoboFile extends D8PTasks {
 
-  /**
-   * Say Hello!
-   *
-   * @param string $world
-   *   Say hello to this.
-   */
-  public function hello($world) {
-    $this->say("Hello, $world");
-  }
-
 }
