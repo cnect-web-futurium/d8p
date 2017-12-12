@@ -42,3 +42,8 @@ bin:
 settings:
   config_directories:
     sync: ../config/sync
+  settings:
+    http_client_config:
+      proxy:
+        http: http://username:password@proxy.server:proxyport
+        https: https://username:password@proxy.server:proxyport
